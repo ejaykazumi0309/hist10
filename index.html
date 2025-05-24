@@ -129,7 +129,6 @@
 
     .scene p {
       font-size: 1.1rem;
-      
       line-height: 1.8;
       margin-bottom: 1.5rem;
     }
@@ -245,8 +244,9 @@
       .timeline-entry button {
         font-size: 1.2rem;
       }
-
-  .group-button {
+    }
+    /*GROU*/
+    .group-button {
   position: fixed;
   bottom: 20px;
   left: 50%;
@@ -306,17 +306,14 @@
 .group-popup li {
   margin: 0.3rem 0;
 }
-    
+
+
   </style>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
 
 </head>
 <body>
   <h1>Dr. Jose Rizal's Timeline</h1>
-
-  <div class="scene" id="scene">
-    <div class="scene-content" id="sceneContent"></div>
-  </div>
 
   <div class="group-button">
     <button onmouseenter="showGroup()" onmouseleave="hideGroup()">GROUP</button>
@@ -333,19 +330,23 @@
         <li>Ryan Jay Liporada</li>
         <li>Rosetan Siarot</li>
         <li>Zandro Toribio</li>
-        <li>Kirby Nudque</li>
       </ul>
     </div>
   </div>
+  
+  
 
   <script>
-    function showGroup() {
+
+function showGroup() {
   document.getElementById('groupPopup').style.display = 'block';
 }
 
 function hideGroup() {
   document.getElementById('groupPopup').style.display = 'none';
 }
+
+
     const sceneData = {
       '1861': {
         title: '1861: Birth of Jose Rizal',
