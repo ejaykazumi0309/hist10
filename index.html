@@ -245,6 +245,67 @@
       .timeline-entry button {
         font-size: 1.2rem;
       }
+
+          .group-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+  font-family: 'Georgia', serif;
+}
+
+.group-button button {
+  background: #8b5a2b;
+  color: #fff8dc;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px 6px 0 0;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.group-button button:hover {
+  background: #a0522d;
+}
+
+.group-popup {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fdf6e3;
+  border: 2px solid #8b5a2b;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  min-width: 220px;
+}
+
+.group-popup h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #5b3a1c;
+  font-family: 'IM Fell English', serif;
+}
+
+.group-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.group-popup li {
+  margin: 0.3rem 0;
+}
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
@@ -257,7 +318,33 @@
     <div class="scene-content" id="sceneContent"></div>
   </div>
 
+  <div class="group-button">
+    <button onmouseenter="showGroup()" onmouseleave="hideGroup()">GROUP</button>
+    <div class="group-popup" id="groupPopup" onmouseenter="showGroup()" onmouseleave="hideGroup()">
+      <h3>Group Members</h3>
+      <ul>
+        <li>Ejay Rosete</li>
+        <li>Shaena Salem</li>
+        <li>Kaye Montes</li>
+        <li>Jericho Claro</li>
+        <li>Francis Ivan ALberio</li>
+        <li>Daisyrie Serdeña</li>
+        <li>Mark Angelo Lonzaga</li>
+        <li>Ryan Jay Liporada</li>
+        <li>Rosetan Siarot</li>
+        <li>Zandro Toribio</li>
+      </ul>
+    </div>
+  </div>
+
   <script>
+    function showGroup() {
+  document.getElementById('groupPopup').style.display = 'block';
+}
+
+function hideGroup() {
+  document.getElementById('groupPopup').style.display = 'none';
+}
     const sceneData = {
       '1861': {
         title: '1861: Birth of Jose Rizal',
