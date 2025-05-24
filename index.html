@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dr. Jose Rizal's Timeline</title>
+  <style>
+    :root {
+  --primary: #3b2f2f; /* Dark brown for text and headers */
+  --accent: #1a1a1a; /* Sepia-toned accent */
+  --bg: #fdf6e3; /* Soft parchment-like background */
+  --text: #3b2f2f; /* Charcoal text */
+  --transition-time: 0.8s;
+  
+}
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: var(--bg) url('yw.jpeg'); /* subtle paper texture */
+      color: var(--text);
+      overflow-x: hidden;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      font-family: 'IM Fell English', serif;
+      color: var(--primary);
+      margin: 3rem 1rem 100px 1rem;
+      text-shadow: 1px 1px 0 #e0d6b4;
+    }
+
+    .timeline-entry {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-entry:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .timeline-entry:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-entry img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .timeline-entry img:hover {
+      transform: scale(1.07);
+    }
+
+    .timeline-entry button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.4rem;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .timeline-entry button:hover {
+      color: #2e2e2e;
+    }
+
+    .scene {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background: #f6ebc0; /* aged paper background */
+  color: var(--primary);
+  padding: 4rem 2rem;
+  z-index: 10;
+  transition: left var(--transition-time) ease, opacity var(--transition-time);
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity var(--transition-time) ease;
+  background-image: url('yw.jpeg');
+  background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  pointer-events: none;
+}
+
+.scene.active {
+  left: 0; /* Keep left fixed so it stays in place */
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity var(--transition-time) ease;
+}
+
+    .scene-content {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      color: 1a1a1a;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .scene h2 {
+      font-size: 2.7rem;
+      margin-bottom: 1rem;
+      font-family: 'IM Fell English', serif;
+      color: #3b2f2f;
+    }
+
+    .scene p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .scene img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-button {
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: #2e2e2e;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-left {
+      animation: slideLeftOut var(--transition-time) forwards;
+    }
+
+    .slide-right {
+      animation: slideRightOut var(--transition-time) forwards;
+    }
+
+    .slide-left-in {
+      animation: slideLeftIn var(--transition-time) forwards;
+    }
+
+    .slide-right-in {
+      animation: slideRightIn var(--transition-time) forwards;
+    }
+
+    @keyframes slideLeftOut {
+      to {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideRightOut {
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideLeftIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideRightIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .left, .right {
+        position: static !important;
+        width: 100% !important;
+        padding: 1rem !important;
+      }
+
+      .timeline-entry,
+      .timeline-entry:nth-child(even),
+      .timeline-entry:nth-child(odd) {
+        flex-direction: column !important;
+        text-align: center;
+      }
+
+      .timeline-entry img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        margin-bottom: 1rem;
+        transform: none !important;
+      }
+
+      .timeline-entry button {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <h1>Dr. Jose Rizal's Timeline</h1>
+
+  <div class="scene" id="scene">
+    <div class="scene-content" id="sceneContent"></div>
+  </div>
+
+  <script>
+    const sceneData = {
+      '1861': {
+        title: '1861: Birth of Jose Rizal',
+        body: 'Jose Rizal was born on June 19, 1861, in Calamba, Laguna, Philippines, to a well-off family of farmers. He was the seventh of eleven children of Francisco Mercado and Teodora Alonso Realonda. Even as a young child, Rizal showed exceptional intelligence and a passion for learning. His mother, who was highly educated herself, played a significant role in nurturing his intellectual development. This early foundation in literature, languages, and values would later shape Rizal into one of the most influential figures in Philippine history and the national hero of the country.',
+        img: 'images.jpeg'
+      },
+      '1877': {
+        title: '1877: Ateneo Municipal de Manila',
+        body: 'In 1877, at the age of 16, Jose Rizal enrolled at the Ateneo Municipal de Manila, a prestigious Jesuit-run school. Despite initial challenges due to his late admission and his frail health, Rizal quickly excelled in his studies. He demonstrated remarkable discipline and brilliance in subjects like Latin, Spanish, philosophy, and the humanities. During his time at Ateneo, he earned numerous academic honors and began to show his talent in poetry and writing. His education at Ateneo helped shape his critical thinking, moral values, and nationalistic ideals, laying the groundwork for his future role as a reformist and national hero.',
+        img: 'joseateneo.jpeg'
+      },
+      '1882': {
+        title: '1882: Studied in Europe',
+        body: 'In 1882, Jose Rizal left the Philippines and sailed to Europe to further his education. He enrolled at the Universidad Central de Madrid in Spain, where he pursued studies in medicine and philosophy. During his time in Europe, Rizal also became deeply engaged in writing, social reform, and the study of liberal ideas. He traveled to France and Germany, where he gained exposure to modern scientific and cultural advancements. His experiences abroad broadened his worldview and solidified his commitment to fighting for Filipino rights and reforms under Spanish colonial rule.',
+        img: 'rizaleurop.jpeg'
+      },
+      '1887': {
+        title: '1887: Noli Me Tangere Published',
+        body: 'In 1887, Jose Rizal published his groundbreaking first novel, Noli Me Tangere, in Berlin, Germany. Written in Spanish, the novel exposed the injustices, corruption, and abuses committed by Spanish friars and colonial officials in the Philippines. Through powerful storytelling and vivid characters, Rizal highlighted the struggles of Filipinos under Spanish rule, calling for reform and national awakening. Despite the risk of persecution, he bravely released the book to inspire change and unite his countrymen. Noli Me Tangere became a cornerstone of the Philippine reform movement and a powerful tool in the nations fight for freedom.',
+        img: 'coverbook.jpeg'
+      },
+      '1891': {
+        title: '1891: El Filibusterismo Published',
+        body: 'In 1891, Jose Rizal published his second novel, El Filibusterismo, as a sequel to Noli Me Tangere. Unlike the hopeful tone of the first book, El Filibusterismo carried a darker and more revolutionary message. It portrayed the deepening corruption, oppression, and social decay under Spanish colonial rule. The novel follows the character Simoun, the disguised identity of Crisostomo Ibarra, who returns to the Philippines with a plan to incite rebellion. Through this work, Rizal conveyed his growing frustration with the lack of meaningful reforms and the suffering of the Filipino people. El Filibusterismo remains a powerful symbol of resistance and a critical work in Philippine literature and history.',
+        img: 'felijose.jpg'
+      },
+      '1896': {
+        title: '1896: Execution in Bagumbayan',
+        body: 'On December 30, 1896, Jose Rizal was executed by a Spanish firing squad at Bagumbayan Field (now Luneta Park) in Manila. He was accused of sedition, rebellion, and conspiracy due to his writings and associations with the Philippine reform movement. Despite advocating peaceful reforms rather than armed revolution, Rizals works—especially Noli Me Tangere and El Filibusterismo—had inspired many Filipinos to fight for independence. His calm demeanor and final moments before execution demonstrated his courage and deep love for his country. Rizals martyrdom ignited even greater resistance against Spanish colonial rule and solidified his legacy as the Philippines national hero.',
+        img: 'lugar.jpeg'
+      }
+    };
+
+    const scene = document.getElementById('scene');
+    const sceneContent = document.getElementById('sceneContent');
+
+    const leftContainer = document.createElement('div');
+    const rightContainer = document.createElement('div');
+
+    leftContainer.className = 'left';
+    rightContainer.className = 'right';
+
+    Object.assign(leftContainer.style, {
+      position: 'fixed',
+      top: '140px',
+      left: '0',
+      width: '50%',
+      height: '100vh',
+      overflowY: 'auto',
+      zIndex: '5',
+      padding: '2rem'
+    });
+
+    Object.assign(rightContainer.style, {
+      position: 'fixed',
+      top: '140px',
+      right: '0',
+      width: '50%',
+      height: '100vh',
+      overflowY: 'auto',
+      zIndex: '5',
+      padding: '2rem'
+    });
+
+    document.body.appendChild(leftContainer);
+    document.body.appendChild(rightContainer);
+
+    const entries = [
+      ['1861', 'Jose Rizal Birth', 'josebirth.jpeg'],
+      ['1877', 'Ateneo', 'josegradute.jpeg'],
+      ['1882', 'Europe', 'rizaleurop.jpeg'],
+      ['1887', 'Noli Me Tangere', 'lolojose.jpeg'],
+      ['1891', 'El Filibusterismo', 'josefeli.jpeg'],
+      ['1896', 'Execution Site', 'deadjose.jpeg']
+    ];
+
+    entries.forEach(([key, label, img], i) => {
+      const entry = document.createElement('div');
+      entry.className = 'timeline-entry';
+      entry.innerHTML = `
+        <button onclick="openScene('${key}')">${key}: ${label}</button>
+        <img src="${img}" onclick="openScene('${key}')" alt="${label}" />
+      `;
+      (i % 2 === 0 ? leftContainer : rightContainer).appendChild(entry);
+    });
+
+    function openScene(key) {
+      leftContainer.classList.add('slide-left');
+      rightContainer.classList.add('slide-right');
+      setTimeout(() => {
+        const data = sceneData[key];
+        sceneContent.innerHTML = `
+          <h2>${data.title}</h2>
+          <img src="${data.img}" alt="${data.title}" />
+          <p>${data.body}</p>
+          <button class="back-button" onclick="closeScene()">Back to Timeline</button>
+        `;
+        scene.classList.add('active');
+      }, 800);
+    }
+
+    function closeScene() {
+  // Start fade-out by removing 'active' class (opacity:1 -> 0)
+  scene.classList.remove('active');
+
+  // Wait for the fade-out transition to complete before restoring timeline
+  setTimeout(() => {
+    leftContainer.classList.remove('slide-left');
+    rightContainer.classList.remove('slide-right');
+
+    leftContainer.classList.add('slide-left-in');
+    rightContainer.classList.add('slide-right-in');
+
+    // After slide-in animation, remove slide-in classes
+    setTimeout(() => {
+      leftContainer.classList.remove('slide-left-in');
+      rightContainer.classList.remove('slide-right-in');
+    }, 800);
+
+  }, 800); // Match the --transition-time duration in your CSS
+}
+
+  </script>
+</body>
+</html>
