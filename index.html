@@ -434,40 +434,47 @@ function hideGroup() {
       (i % 2 === 0 ? leftContainer : rightContainer).appendChild(entry);
     });
 
-    function openScene(key) {
-      leftContainer.classList.add('slide-left');
-      rightContainer.classList.add('slide-right');
-      setTimeout(() => {
-        const data = sceneData[key];
-        sceneContent.innerHTML = `
-          <h2>${data.title}</h2>
-          <img src="${data.img}" alt="${data.title}" />
-          <p>${data.body}</p>
-          <button class="back-button" onclick="closeScene()">Back to Timeline</button>
-        `;
-        scene.classList.add('active');
-      }, 800);
-    }
+   function openScene(key) {
+  // Remove any slide-in classes first (just in case)
+  leftContainer.classList.remove('slide-left-in');
+  rightContainer.classList.remove('slide-right-in');
 
-    function closeScene() {
-  // Start fade-out by removing 'active' class (opacity:1 -> 0)
+  leftContainer.classList.add('slide-left');
+  rightContainer.classList.add('slide-right');
+
+  setTimeout(() => {
+    const data = sceneData[key];
+    sceneContent.innerHTML = `
+      <h2>${data.title}</h2>
+      <img src="${data.img}" alt="${data.title}" />
+      <p>${data.body}</p>
+      <button class="back-button" onclick="closeScene()">Back to Timeline</button>
+    `;
+    scene.classList.add('active');
+  }, 800);
+}
+
+function closeScene() {
   scene.classList.remove('active');
 
-  // Wait for the fade-out transition to complete before restoring timeline
   setTimeout(() => {
+    // Remove slide-out classes before adding slide-in classes
     leftContainer.classList.remove('slide-left');
     rightContainer.classList.remove('slide-right');
 
     leftContainer.classList.add('slide-left-in');
     rightContainer.classList.add('slide-right-in');
 
-    // After slide-in animation, remove slide-in classes
+    // Clear the scene content so it doesn't linger in background
+    sceneContent.innerHTML = '';
+
     setTimeout(() => {
       leftContainer.classList.remove('slide-left-in');
       rightContainer.classList.remove('slide-right-in');
     }, 800);
-
-  }, 800); // Match the --transition-time duration in your CSS
+  }, 800);
+}
+Match the --transition-time duration in your CSS
 }
 
   </script>
